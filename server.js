@@ -8,9 +8,11 @@ const http = require( 'http' ),
       port = 3000
 
 const appdata = [
-  { 'model': 'toyota', 'year': 1999, 'mpg': 23 },
-  { 'model': 'honda', 'year': 2004, 'mpg': 30 },
-  { 'model': 'ford', 'year': 1987, 'mpg': 14} 
+  { 'book': 'The Hunger Games', 'pagesRead': 150, 'totalPages': 374, 'percentComplete': 40 },
+  { 'book': 'Catching Fire', 'pagesRead': 200, 'totalPages': 391, 'percentComplete': 51 },
+  { 'book': 'Mockingjay', 'pagesRead': 100, 'totalPages': 390, 'percentComplete': 26 }, 
+  { 'book': 'The Ballad of Songbirds and Snakes', 'pagesRead': 250, 'totalPages': 528, 'percentComplete': 47 }, 
+  { 'book': 'Sunrise on the Reaping', 'pagesRead': 300, 'totalPages': 400, 'percentComplete': 75 }, 
 ]
 
 const server = http.createServer( function( request,response ) {
