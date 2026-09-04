@@ -8,11 +8,11 @@ const http = require( 'http' ),
       port = 3000
 
 const appdata = [
-  { 'book': 'The Hunger Games', 'pagesRead': 150, 'totalPages': 374, 'percentComplete': 40 },
-  { 'book': 'Catching Fire', 'pagesRead': 200, 'totalPages': 391, 'percentComplete': 51 },
-  { 'book': 'Mockingjay', 'pagesRead': 100, 'totalPages': 390, 'percentComplete': 26 }, 
-  { 'book': 'The Ballad of Songbirds and Snakes', 'pagesRead': 250, 'totalPages': 528, 'percentComplete': 47 }, 
-  { 'book': 'Sunrise on the Reaping', 'pagesRead': 300, 'totalPages': 400, 'percentComplete': 75 }, 
+  { 'book': 'The Hunger Games', 'author': 'Suzanne Collins', 'pagesRead': 150, 'totalPages': 374, 'percentComplete': 40 },
+  { 'book': 'Catching Fire', 'author': 'Suzanne Collins', 'pagesRead': 200, 'totalPages': 391, 'percentComplete': 51 },
+  { 'book': 'Mockingjay', 'author': 'Suzanne Collins', 'pagesRead': 100, 'totalPages': 390, 'percentComplete': 26 }, 
+  { 'book': 'The Ballad of Songbirds and Snakes', 'author': 'Suzanne Collins', 'pagesRead': 250, 'totalPages': 528, 'percentComplete': 47 }, 
+  { 'book': 'Sunrise on the Reaping', 'author': 'Suzanne Collins', 'pagesRead': 300, 'totalPages': 400, 'percentComplete': 75 }, 
 ]
 
 const server = http.createServer( function( request,response ) {
@@ -26,7 +26,10 @@ const server = http.createServer( function( request,response ) {
 const handleGet = function( request, response ) {
   const filename = dir + request.url.slice( 1 ) 
 
-  if( request.url === '/' ) {
+  if( request.url === '/data' ) {
+    response.writeHead( 200, "OK", {'Content-Type': 'text/plain'} )
+    response.end( JSON.stringify( appdata ) )
+  }else if( request.url === '/' ) {
     sendFile( response, 'public/index.html' )
   }else{
     sendFile( response, filename )

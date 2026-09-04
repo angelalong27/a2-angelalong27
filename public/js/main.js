@@ -8,10 +8,11 @@ const submit = async function( event ) {
   event.preventDefault()
   
   const book = document.querySelector( '#book' ),
+        author = document.querySelector( '#author' ),
         pagesRead = document.querySelector( '#pagesRead' ),
         totalPages = document.querySelector( '#totalPages' ),
 
-        json = { book: book.value, pagesRead: pagesRead.value, totalPages: totalPages.value },
+        json = { book: book.value, author: author.value, pagesRead: pagesRead.value, totalPages: totalPages.value },
         body = JSON.stringify( json )
 
   const response = await fetch( '/submit', {
@@ -32,6 +33,7 @@ const submit = async function( event ) {
     readingList.innerHTML += 
     `<tr>
     <td>${book.book}</td>
+    <td>${book.author}</td>
     <td>${book.pagesRead}</td>
     <td>${book.totalPages}</td>
     <td>${book.percentComplete}%</td>
@@ -39,7 +41,16 @@ const submit = async function( event ) {
   })
 }
 
+const loadBooks = async function() {
+  const response = await fetch( '/data' )
+  const text = await response.text()
+
+  console.log( 'data:', text )
+}
+
 window.onload = function() {
   const button = document.querySelector('button')
   button.onclick = submit
+
+  loadBooks()
 }
