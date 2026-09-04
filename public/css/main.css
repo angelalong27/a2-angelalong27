@@ -10,8 +10,11 @@ p {
 }
 
 table {
-  border: 2px solid #E6E0C4;
-  color: 86ABCB;
-  text-align: left;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+th, td {
+  border: 3px solid #E6E0C4;
   padding: 10px;
 }
