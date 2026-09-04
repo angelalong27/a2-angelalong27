@@ -22,6 +22,21 @@ const submit = async function( event ) {
   const text = await response.text()
 
   console.log( 'text:', text )
+
+  const data = JSON.parse( text )
+  const readingList = document.querySelector( '#readingList' )
+  
+  readingList.innerHTML = ''
+  
+  data.forEach( function( book ) {
+    readingList.innerHTML += 
+    `<tr>
+    <td>${book.book}</td>
+    <td>${book.pagesRead}</td>
+    <td>${book.totalPages}</td>
+    <td>${book.percentComplete}%</td>
+    </tr>`
+  })
 }
 
 window.onload = function() {
