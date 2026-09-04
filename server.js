@@ -41,13 +41,17 @@ const handlePost = function( request, response ) {
   })
 
   request.on( 'end', function() {
-    console.log( JSON.parse( dataString ) )
+    const newBook = JSON.parse( dataString ) 
+
     // ... do something with the data here!!!
+    newBook.percentComplete = Math.round(( newBook.pagesRead / newBook.totalPages ) * 100 )
+
+    appdata.push( newBook)
 
     response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
 
     // change this to incorporate data
-    response.end('test')
+    response.end( JSON.stringify( appdata ) )
   })
 }
 
@@ -60,13 +64,13 @@ const sendFile = function( response, filename ) {
      if( err === null ) {
 
        // status code: https://httpstatuses.com
-       response.writeHeader( 200, { 'Content-Type': type })
+       response.writeHead( 200, { 'Content-Type': type })
        response.end( content )
 
      }else{
 
        // file not found, error code 404
-       response.writeHeader( 404 )
+       response.writeHead( 404 )
        response.end( '404 Error: File Not Found' )
 
      }
