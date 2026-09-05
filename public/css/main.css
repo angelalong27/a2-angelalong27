@@ -1,6 +1,7 @@
 body {
   background:#86ABCB;
   color:#E6E0C4;
+  font-family: "Miranda Sans";
 }
 
 p {
@@ -22,4 +23,26 @@ th, td {
 
 th {
   font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 25%;
+}
+
+.submitButton {
+  align-self: flex-end;
+  cursor: pointer;
+  padding: 4px 10px;
+}
+
+#readingList {
+  font-size: 16px;
+}
+
+.deleteButton {
+  cursor: pointer;
+  padding: 5px 15px;
 }

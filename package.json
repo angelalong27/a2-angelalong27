@@ -1,8 +1,8 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "a2-angelalong27",
+  "version": "1",
+  "description": "A reading tracker website that helps keep track of the books you are currently reading, what page you're on, how many pages are in each book, and your percentage of completion",
+  "author": "Angela Long",
   "scripts": {
     "start": "node server.js"
   },
