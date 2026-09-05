@@ -44,6 +44,15 @@ const handlePost = function( request, response ) {
   })
 
   request.on( 'end', function() {
+    if( request.url === '/delete' ) {
+      const data = JSON.parse( dataString )
+      appdata.splice( data.index, 1 )
+    
+      response.writeHead( 200, "OK", {'Content-Type': 'text/plain'} )
+      response.end( JSON.stringify( appdata ) )
+      return
+    }
+    
     const newBook = JSON.parse( dataString ) 
 
     // ... do something with the data here!!!

@@ -5,7 +5,7 @@ const displayBooks = function( data ) {
 
   readingList.innerHTML = ''
 
-  data.forEach( function( book ) {
+  data.forEach( function( book, index ) {
     readingList.innerHTML += 
     `<tr>
     <td>${book.book}</td>
@@ -13,9 +13,32 @@ const displayBooks = function( data ) {
     <td>${book.pagesRead}</td>
     <td>${book.totalPages}</td>
     <td>${book.percentComplete}%</td>
-    <td><button class="deleteButton">Delete</button></td>
+    <td><button class="deleteButton" data-index="${index}">Delete</button></td>
     </tr>`
   })
+
+  const deleteButtons = document.querySelectorAll( '.deleteButton' )
+  deleteButtons.forEach( function( button ) {
+    button.onclick = function() {
+      const index = button.getAttribute( 'data-index' )
+      deleteBook( index )
+    }
+  })
+}
+
+const deleteBook = async function( index ) {
+  const json = { index: index }, 
+    body = JSON.stringify( json )
+  
+  const response = await fetch( '/delete', {
+    method:'POST',
+    body
+  })
+  
+  const text = await response.text()
+  const data = JSON.parse( text )
+  
+  displayBooks( data )
 }
 
 const submit = async function( event ) {
