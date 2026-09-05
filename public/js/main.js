@@ -1,5 +1,22 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
 
+const displayBooks = function( data ) {
+  const readingList = document.querySelector( '#readingList' )
+
+  readingList.innerHTML = ''
+
+  data.forEach( function( book ) {
+    readingList.innerHTML += 
+    `<tr>
+    <td>${book.book}</td>
+    <td>${book.author}</td>
+    <td>${book.pagesRead}</td>
+    <td>${book.totalPages}</td>
+    <td>${book.percentComplete}%</td>
+    </tr>`
+  })
+}
+
 const submit = async function( event ) {
   // stop form submission from trying to load
   // a new .html page for displaying results...
@@ -21,24 +38,9 @@ const submit = async function( event ) {
   })
 
   const text = await response.text()
-
   console.log( 'text:', text )
-
   const data = JSON.parse( text )
-  const readingList = document.querySelector( '#readingList' )
-  
-  readingList.innerHTML = ''
-  
-  data.forEach( function( book ) {
-    readingList.innerHTML += 
-    `<tr>
-    <td>${book.book}</td>
-    <td>${book.author}</td>
-    <td>${book.pagesRead}</td>
-    <td>${book.totalPages}</td>
-    <td>${book.percentComplete}%</td>
-    </tr>`
-  })
+  displayBooks( data )
 }
 
 const loadBooks = async function() {
@@ -46,6 +48,9 @@ const loadBooks = async function() {
   const text = await response.text()
 
   console.log( 'data:', text )
+
+  const data = JSON.parse( text )
+  displayBooks( data )
 }
 
 window.onload = function() {

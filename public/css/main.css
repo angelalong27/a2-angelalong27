@@ -17,4 +17,9 @@ table {
 th, td {
   border: 3px solid #E6E0C4;
   padding: 10px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
 }
