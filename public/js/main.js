@@ -13,6 +13,7 @@ const displayBooks = function( data ) {
     <td>${book.pagesRead}</td>
     <td>${book.totalPages}</td>
     <td>${book.percentComplete}%</td>
+    <td><button class="deleteButton">Delete</button></td>
     </tr>`
   })
 }
