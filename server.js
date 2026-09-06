@@ -52,13 +52,19 @@ const handlePost = function( request, response ) {
       response.end( JSON.stringify( appdata ) )
       return
     }
-    
+
     const newBook = JSON.parse( dataString ) 
 
     // ... do something with the data here!!!
     newBook.percentComplete = Math.round(( newBook.pagesRead / newBook.totalPages ) * 100 )
 
-    appdata.push( newBook)
+    if( newBook.index >= 0 ) {
+      appdata[newBook.index] = newBook
+    }else{
+      appdata.push( newBook )
+    }
+
+    delete newBook.index
 
     response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
 

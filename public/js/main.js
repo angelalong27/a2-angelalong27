@@ -1,5 +1,7 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
 
+let editIndex = -1
+
 const displayBooks = function( data ) {
   const readingList = document.querySelector( '#readingList' )
 
@@ -39,6 +41,8 @@ const displayBooks = function( data ) {
 }
 
 const editBook = function( index, data ) {
+  editIndex = index
+
   document.querySelector( '#book' ).value = data[index].book
   document.querySelector( '#author' ).value = data[index].author
   document.querySelector( '#pagesRead' ).value = data[index].pagesRead
@@ -72,7 +76,7 @@ const submit = async function( event ) {
         pagesRead = document.querySelector( '#pagesRead' ),
         totalPages = document.querySelector( '#totalPages' ),
 
-        json = { book: book.value, author: author.value, pagesRead: pagesRead.value, totalPages: totalPages.value },
+        json = { book: book.value, author: author.value, pagesRead: pagesRead.value, totalPages: totalPages.value, index: editIndex },
         body = JSON.stringify( json )
 
   const response = await fetch( '/submit', {
@@ -84,6 +88,7 @@ const submit = async function( event ) {
   console.log( 'text:', text )
   const data = JSON.parse( text )
   displayBooks( data )
+  editIndex = -1
 }
 
 const loadBooks = async function() {
