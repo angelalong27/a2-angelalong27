@@ -42,7 +42,7 @@ form {
   font-size: 16px;
 }
 
-.deleteButton {
+.editButton, .deleteButton {
   cursor: pointer;
   padding: 5px 15px;
 }

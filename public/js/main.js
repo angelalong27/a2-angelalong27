@@ -13,8 +13,20 @@ const displayBooks = function( data ) {
     <td>${book.pagesRead}</td>
     <td>${book.totalPages}</td>
     <td>${book.percentComplete}%</td>
-    <td><button class="deleteButton" data-index="${index}">Delete</button></td>
+    <td>
+      <button class="editButton" data-index="${index}">Edit</button>
+      <button class="deleteButton" data-index="${index}">Delete</button>
+    </td>
     </tr>`
+  })
+
+  const editButtons = document.querySelectorAll( '.editButton' )
+
+  editButtons.forEach( function( button ) {
+    button.onclick = function() {
+      const index = button.getAttribute( 'data-index' )
+      editBook( index, data )
+    }
   })
 
   const deleteButtons = document.querySelectorAll( '.deleteButton' )
@@ -24,6 +36,13 @@ const displayBooks = function( data ) {
       deleteBook( index )
     }
   })
+}
+
+const editBook = function( index, data ) {
+  document.querySelector( '#book' ).value = data[index].book
+  document.querySelector( '#author' ).value = data[index].author
+  document.querySelector( '#pagesRead' ).value = data[index].pagesRead
+  document.querySelector( '#totalPages' ).value = data[index].totalPages
 }
 
 const deleteBook = async function( index ) {
